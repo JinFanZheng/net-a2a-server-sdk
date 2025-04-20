@@ -1,5 +1,4 @@
 using A2A.Server.SDK.Schema;
-using A2A.Server.SDK.Utils;
 
 namespace A2A.Server.SDK.Handlers
 {

@@ -1,9 +1,5 @@
 using A2A.Server.SDK.Handlers;
 using A2A.Server.SDK.Schema;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Xunit;
 
 namespace A2A.Server.SDK.Tests
 {

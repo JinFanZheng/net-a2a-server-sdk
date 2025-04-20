@@ -7,12 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Collections.Concurrent;
-using System.Runtime.CompilerServices;
-using System;
-using System.Collections.Generic;
-using System.Threading;
 using Task = System.Threading.Tasks.Task;
-using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -31,7 +26,7 @@ namespace A2A.Server.SDK
         /// <summary>
         /// Agent卡片，提供有关此服务的信息
         /// </summary>
-        public dynamic? Card { get; set; }
+        public AgentCard? Card { get; set; }
 
         /// <summary>
         /// A2A端点的基本路径。默认为"/"。
@@ -62,7 +57,7 @@ namespace A2A.Server.SDK
         /// <summary>
         /// Agent卡片，包含服务描述
         /// </summary>
-        public dynamic? Card { get; }
+        public AgentCard? Card { get; }
 
         /// <summary>
         /// 初始化A2A服务器的新实例

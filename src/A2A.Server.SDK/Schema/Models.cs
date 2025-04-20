@@ -117,6 +117,78 @@ namespace A2A.Server.SDK.Schema
     }
 
     /// <summary>
+    /// 表示代理的元数据卡片，描述其属性和功能。
+    /// </summary>
+    public class AgentCard
+    {
+        /// <summary>
+        /// 代理的名称。
+        /// </summary>
+        [JsonProperty("name")]
+        public string Name { get; set; } = string.Empty;
+
+        /// <summary>
+        /// 代理的可选描述。
+        /// </summary>
+        [JsonProperty("description")]
+        public string? Description { get; set; }
+
+        /// <summary>
+        /// 与代理交互的基本URL端点。
+        /// </summary>
+        [JsonProperty("url")]
+        public string Url { get; set; } = string.Empty;
+
+        /// <summary>
+        /// 代理提供者的信息。
+        /// </summary>
+        [JsonProperty("provider")]
+        public AgentProvider? Provider { get; set; }
+
+        /// <summary>
+        /// 代理或其API的版本标识符。
+        /// </summary>
+        [JsonProperty("version")]
+        public string Version { get; set; } = string.Empty;
+
+        /// <summary>
+        /// 指向代理文档的可选URL。
+        /// </summary>
+        [JsonProperty("documentationUrl")]
+        public string? DocumentationUrl { get; set; }
+
+        /// <summary>
+        /// 代理支持的功能。
+        /// </summary>
+        [JsonProperty("capabilities")]
+        public AgentCapabilities Capabilities { get; set; } = new();
+
+        /// <summary>
+        /// 与代理交互所需的身份验证详细信息。
+        /// </summary>
+        [JsonProperty("authentication")]
+        public AgentAuthentication? Authentication { get; set; }
+
+        /// <summary>
+        /// 代理支持的默认输入模式（例如，'text'、'file'、'json'）。
+        /// </summary>
+        [JsonProperty("defaultInputModes")]
+        public List<string>? DefaultInputModes { get; set; }
+
+        /// <summary>
+        /// 代理支持的默认输出模式（例如，'text'、'file'、'json'）。
+        /// </summary>
+        [JsonProperty("defaultOutputModes")]
+        public List<string>? DefaultOutputModes { get; set; }
+
+        /// <summary>
+        /// 代理提供的特定技能列表。
+        /// </summary>
+        [JsonProperty("skills")]
+        public List<AgentSkill> Skills { get; set; } = new();
+    }
+    
+    /// <summary>
     /// 定义Agent的认证方案和凭据
     /// </summary>
     public class AgentAuthentication

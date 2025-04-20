@@ -1,6 +1,5 @@
 using A2A.Server.SDK.Schema;
 using A2A.Server.SDK.Utils;
-using Xunit;
 
 namespace A2A.Server.SDK.Tests
 {

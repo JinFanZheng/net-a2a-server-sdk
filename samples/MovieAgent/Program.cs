@@ -1,15 +1,6 @@
-﻿using System;
-using System.IO;
-using A2A.Server.SDK;
-using A2A.Server.SDK.Handlers;
+﻿using A2A.Server.SDK;
 using A2A.Server.SDK.Schema;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using System.Collections.Generic;
 using Task = System.Threading.Tasks.Task;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
@@ -34,7 +25,7 @@ namespace MovieAgent
             // 配置
             var configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .AddJsonFile("appsettings.Development.json", optional: true, reloadOnChange: true)
                 .AddEnvironmentVariables()
                 .Build();
 
@@ -78,12 +69,38 @@ namespace MovieAgent
                     // 配置服务器选项
                     BasePath = "/",
                     EnableCors = true,
-                    Card = new
+                    Card = new AgentCard
                     {
-                        name = "电影专家助手",
-                        description = "提供电影和演员信息的智能助手，由OpenAI增强",
-                        version = "1.0.0",
-                        url = $"http://localhost:{configuration["Server:Port"] ?? "3000"}"
+                        Name = "电影专家助手",
+                        Description = "提供电影和演员信息的智能助手，由OpenAI增强",
+                        Version = "1.0.0",
+                        Url = $"http://localhost:{configuration["Server:Port"] ?? "3000"}",
+                        Provider = new AgentProvider
+                        {
+                            Organization = "A2A",
+                            Url = "https://a2a.com"
+                        },
+                        Capabilities = new AgentCapabilities
+                        {
+                            Streaming = true,
+                            PushNotifications = true,
+                            StateTransitionHistory = true,
+                        },
+                        Skills = new List<AgentSkill>
+                        {
+                            new AgentSkill
+                            {
+                                Id = "search_movies",
+                                Name = "搜索电影",
+                                Description = "搜索电影信息",
+                            },
+                            new AgentSkill
+                            {
+                                Id = "search_people",
+                                Name = "搜索演员",
+                                Description = "搜索演员信息",
+                            }
+                        }
                     }
                 };
 
@@ -131,6 +148,8 @@ namespace MovieAgent
                 
                 // 映射/.well-known/agent.json路由，返回Card信息
                 app.MapGet("/.well-known/agent.json", () => options.Card);
+
+                app.MapGet("/agent-card", () => options.Card);
                 
                 // 启动应用程序
                 int port = int.Parse(configuration["Server:Port"] ?? "3000");

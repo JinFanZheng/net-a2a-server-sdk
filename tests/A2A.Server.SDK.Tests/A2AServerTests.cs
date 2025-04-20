@@ -2,13 +2,8 @@ using A2A.Server.SDK.Handlers;
 using A2A.Server.SDK.Schema;
 using A2A.Server.SDK.Storage;
 using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
-using Xunit;
 using Task = System.Threading.Tasks.Task;
 
 namespace A2A.Server.SDK.Tests
@@ -397,11 +392,11 @@ namespace A2A.Server.SDK.Tests
                 BasePath = "/test/path",
                 EnableCors = true,
                 TaskStore = new InMemoryTaskStore(),
-                Card = new
+                Card = new AgentCard
                 {
-                    name = "测试代理",
-                    description = "用于测试的A2A代理",
-                    version = "1.0.0"
+                    Name = "测试代理",
+                    Description = "用于测试的A2A代理",
+                    Version = "1.0.0"
                 }
             };
 

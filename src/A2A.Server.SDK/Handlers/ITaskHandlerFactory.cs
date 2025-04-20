@@ -1,5 +1,3 @@
-using A2A.Server.SDK.Schema;
-
 namespace A2A.Server.SDK.Handlers
 {
     /// <summary>
